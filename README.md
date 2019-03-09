@@ -16,5 +16,5 @@ Feature List: ( **[in progress!](#)** )
    <li> and more...</li>
    </lu>
     
-    Hungry? Have a fork!
+    Hungry? Grab a fork!
     
