@@ -4,7 +4,10 @@ previous_block=`tail -n1 'database'`
 id=$((${previous_block%%:*}+1))
 while : ; do
 	nonce=$RANDOM
-	checksum=`echo "${previous_block##*:}:$id:$payload:$nonce"|sha256sum|sed 's/[ -]*$//'`
-	[[ "${checksum: -2}" == '00' ]] && break;
+	checksum=`echo "${previous_block##*:}:$id:$payload:$nonce"|sha256sum|sed 's/[ -]*$//'`;
+	ndr=$(($nonce - $RANDOM));
+	ndr="${ndr: -2}";
+	#[[ "${checksum: -2}" == '00' ]] && break;
+	[[ "${checksum: -2}" == "${ndr}" ]] && break;
 done
-echo "$id:$payload:$nonce:$checksum">>'database'
+echo "$id:$payload:$nonce:$checksum">>'database';
